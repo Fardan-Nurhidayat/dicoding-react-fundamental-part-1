@@ -1,6 +1,9 @@
 import { notes } from "./data";
 const LOCAL_STORAGE_KEY = "notes_app_data_v1";
+
 export async function getAllNotes() {
+  await new Promise((resolve) => setTimeout(resolve, 800));
+  
   const data = localStorage.getItem(LOCAL_STORAGE_KEY);
   if (data) {
     try {
@@ -88,6 +91,37 @@ export function deleteNoteById(id) {
 }
 
 
+
+export function addNote(title, body) {
+  const data = localStorage.getItem(LOCAL_STORAGE_KEY);
+  let allNotes = [];
+  
+  if (data) {
+    try {
+      const parsed = JSON.parse(data);
+      if (Array.isArray(parsed)) {
+        allNotes = parsed;
+      }
+    } catch (e) {
+      console.error("Failed to parse notes from localStorage", e);
+    }
+  } else {
+    allNotes = [...notes];
+  }
+  
+  const newNote = {
+    id: `${Date.now()}`,
+    title,
+    body,
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+    archived: false
+  };
+  
+  const updatedNotes = [newNote, ...allNotes];
+  localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(updatedNotes));
+  return newNote;
+}
 
 export const formatedDate = (dateString) => {
   const options = { year: "numeric", month: "long", day: "numeric" };

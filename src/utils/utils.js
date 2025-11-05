@@ -18,6 +18,28 @@ export async function getAllNotes() {
   return notes;
 }
 
+export async function getNoteById(id) {
+  await new Promise((resolve) => setTimeout(resolve, 500));
+  
+  const data = localStorage.getItem(LOCAL_STORAGE_KEY);
+  let allNotes = [];
+  
+  if (data) {
+    try {
+      const parsed = JSON.parse(data);
+      if (Array.isArray(parsed)) {
+        allNotes = parsed;
+      }
+    } catch (e) {
+      console.error("Failed to parse notes from localStorage", e);
+    }
+  } else {
+    allNotes = notes;
+  }
+  
+  return allNotes.find((note) => note.id === id) || null;
+}
+
 export function archiveNoteById(id) {
   const data = localStorage.getItem(LOCAL_STORAGE_KEY);
   let allNotes = [];

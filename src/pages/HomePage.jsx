@@ -1,12 +1,22 @@
 import { getAllNotes, archiveNoteById, deleteNoteById } from "@utils/utils";
 import { useState, useEffect } from "react";
+import { useSearchParams } from "react-router";
 import NotesList from "@components/notes/NotesList";
 import SearchBar from "@components/SearchBar";
 import { DocumentTextIcon } from "@heroicons/react/24/outline";
 
 export default function HomePage() {
   const [unarchivedNotes, setUnarchivedNotes] = useState([]);
-  const [searchQuery, setSearchQuery] = useState("");
+  const [searchParams, setSearchParams] = useSearchParams();
+  const searchQuery = searchParams.get("search") || "";
+
+  const handleSearchChange = (query) => {
+    if (query) {
+      setSearchParams({ search: query });
+    } else {
+      setSearchParams({});
+    }
+  };
 
   const handleArchive = (id) => {
     archiveNoteById(id);
@@ -51,7 +61,7 @@ export default function HomePage() {
           </div>
           <SearchBar 
             query={searchQuery} 
-            onQueryChange={setSearchQuery}
+            onQueryChange={handleSearchChange}
             placeholder="Search active notes..."
           />
         </div>

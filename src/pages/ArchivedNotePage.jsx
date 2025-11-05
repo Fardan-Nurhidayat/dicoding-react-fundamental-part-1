@@ -1,12 +1,22 @@
 import { getAllNotes, deleteNoteById, unarchiveNoteById } from "@utils/utils";
 import { useState, useEffect } from "react";
+import { useSearchParams } from "react-router";
 import NotesListArchived from "@components/notes/NotesListArchived";
 import SearchBar from "@components/SearchBar";
 import { ArchiveBoxIcon } from "@heroicons/react/24/outline";
 
 export default function ArchivedNotePage() {
   const [archivedNotes, setArchivedNotes] = useState([]);
-  const [searchQuery, setSearchQuery] = useState("");
+  const [searchParams, setSearchParams] = useSearchParams();
+  const searchQuery = searchParams.get("search") || "";
+
+  const handleSearchChange = (query) => {
+    if (query) {
+      setSearchParams({ search: query });
+    } else {
+      setSearchParams({});
+    }
+  };
 
   useEffect(() => {
     async function fetchNotes() {
@@ -51,7 +61,7 @@ export default function ArchivedNotePage() {
           </div>
           <SearchBar 
             query={searchQuery} 
-            onQueryChange={setSearchQuery}
+            onQueryChange={handleSearchChange}
             placeholder="Search archived notes..."
           />
         </div>

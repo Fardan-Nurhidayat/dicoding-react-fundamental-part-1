@@ -2,6 +2,7 @@ import PropTypes from "prop-types";
 import { formatedDate } from "@utils/utils";
 import Button from "@components/Button";
 import { ArchiveBoxIcon, TrashIcon } from "@heroicons/react/24/outline";
+import { Link } from "react-router";
 
 export default function NotesItems({
   id,
@@ -17,12 +18,14 @@ export default function NotesItems({
       <div className="absolute top-0 left-0 w-full h-1 bg-linear-to-r from-teal-500 to-blue-500"></div>
       
       <div className="p-6">
-        <h2 className="text-xl font-bold text-gray-800 mb-3 line-clamp-2 group-hover:text-teal-600 transition-colors">
-          {title}
-        </h2>
-        <p className="text-gray-600 mb-4 line-clamp-3 text-sm leading-relaxed">
-          {body}
-        </p>
+        <Link to={`/notes/${id}`} className="block mb-4">
+          <h2 className="text-xl font-bold text-gray-800 mb-3 line-clamp-2 group-hover:text-teal-600 transition-colors">
+            {title}
+          </h2>
+          <p className="text-gray-600 mb-4 line-clamp-3 text-sm leading-relaxed">
+            {body}
+          </p>
+        </Link>
         
         <div className="flex items-center justify-between text-xs text-gray-500 mb-4 pb-4 border-b border-gray-100">
           <span className="flex items-center gap-1">

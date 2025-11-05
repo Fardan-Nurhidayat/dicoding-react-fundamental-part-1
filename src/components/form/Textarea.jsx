@@ -1,7 +1,6 @@
 import PropTypes from "prop-types";
 
-export default function Input({ 
-  type = "text", 
+export default function Textarea({ 
   name, 
   id,
   value, 
@@ -10,12 +9,12 @@ export default function Input({
   required = false,
   className = "",
   disabled = false,
+  rows = 4,
   maxLength,
   ...props
 }) {
   return (
-    <input
-      type={type}
+    <textarea
       name={name}
       id={id || name}
       value={value}
@@ -23,15 +22,15 @@ export default function Input({
       placeholder={placeholder}
       required={required}
       disabled={disabled}
+      rows={rows}
       maxLength={maxLength}
-      className={`w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all duration-200 text-gray-800 placeholder-gray-400 disabled:bg-gray-100 disabled:cursor-not-allowed ${className}`}
+      className={`w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all duration-200 text-gray-800 placeholder-gray-400 resize-none disabled:bg-gray-100 disabled:cursor-not-allowed ${className}`}
       {...props}
     />
   );
 }
 
-Input.propTypes = {
-  type: PropTypes.string,
+Textarea.propTypes = {
   name: PropTypes.string.isRequired,
   id: PropTypes.string,
   value: PropTypes.string,
@@ -40,5 +39,6 @@ Input.propTypes = {
   required: PropTypes.bool,
   className: PropTypes.string,
   disabled: PropTypes.bool,
+  rows: PropTypes.number,
   maxLength: PropTypes.number,
 };

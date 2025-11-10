@@ -2,7 +2,6 @@ import { useState } from "react";
 import PropTypes from "prop-types";
 import Input from "./input";
 import Textarea from "./Textarea";
-import Label from "./label";
 import FormField from "./FormField";
 import FormActions from "./FormActions";
 import CharacterCounter from "./CharacterCounter";

@@ -10,7 +10,7 @@ export default function Label({
   return (
     <label 
       htmlFor={htmlFor} 
-      className={`flex items-center gap-2 text-sm font-semibold text-gray-700 mb-2 ${className}`}
+      className={`flex items-center gap-2 text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2 ${className}`}
     >
       {icon && <span className="w-5 h-5">{icon}</span>}
       {children}

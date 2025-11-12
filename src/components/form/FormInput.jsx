@@ -53,7 +53,7 @@ export default function FormInput({
   };
 
   return (
-    <form onSubmit={handleSubmit} className="bg-white rounded-2xl shadow-lg p-8 space-y-6">
+    <form onSubmit={handleSubmit} className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-8 space-y-6 transition-colors duration-300">
       <FormField
         label="Title"
         htmlFor="title"

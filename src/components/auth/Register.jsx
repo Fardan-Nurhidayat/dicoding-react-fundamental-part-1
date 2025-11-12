@@ -3,6 +3,7 @@ import { Label } from "@components/form";
 import { UserCircleIcon , LockOpenIcon , EnvelopeIcon } from "@heroicons/react/24/outline";
 import { useState } from "react";
 import { registerUser } from "@utils/api";
+import { Spinner } from "@material-tailwind/react";
 const validators = {
   name : (value) => value.length >= 3,
   email : (value) => /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(value),
@@ -10,6 +11,7 @@ const validators = {
   samePassword : (pass, samePass) => pass === samePass,
 }
 export default function Register() {
+  const [loading , setLoading] = useState(false);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -86,6 +88,7 @@ export default function Register() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     const nameError = !validators.name(name) ? "Name must be at least 3 characters long." : null;
     const emailError = !validators.email(email) ? "Invalid email address." : null;
     const passwordError = !validators.password(password) ? "Password must be at least 6 characters long." : null;
@@ -99,8 +102,10 @@ export default function Register() {
     if (!nameError && !emailError && !passwordError && !samePasswordError) {
       try {
         await registerUser({ name, email, password });
+        setLoading(false);
         alert("Registration successful! You can now log in.");
       } catch (error) {
+        setLoading(false);
         alert(`Registration failed: ${error.message}`);
       }
       // Reset form
@@ -120,10 +125,18 @@ export default function Register() {
 
 
   return (
-    <div className='w-full h-screen flex flex-col items-center justify-center bg-gray-100'>
-      <div className='min-w-xl min-h-1/2 bg-white rounded-lg shadow-md p-5'>
-        <h2 className='text-2xl font-semibold mb-2 text-center'>Register</h2>
-        <p className='text-md font-semibold text-gray-300 text-center'>
+    <div className='w-full h-screen flex flex-col items-center justify-center bg-gray-100 dark:bg-gray-900 transition-colors duration-300'>
+      {loading && (
+        <div className='absolute top-0 left-0 w-full h-full bg-gray-500/50 dark:bg-gray-900/70 flex items-center justify-center z-50'>
+          <Spinner
+            className='h-12 w-12 text-gray-900/50 dark:text-gray-100/50'
+            color='blue'
+          />
+        </div>
+      )}
+      <div className='min-w-xl min-h-1/2 bg-white dark:bg-gray-800 rounded-lg shadow-md p-5 transition-colors duration-300'>
+        <h2 className='text-2xl font-semibold mb-2 text-center text-gray-900 dark:text-gray-100'>Register</h2>
+        <p className='text-md font-semibold text-gray-500 dark:text-gray-400 text-center'>
           Enter your name , email , and password to register an account.
         </p>
         <div className='my-5 md:mx-10'>
@@ -133,9 +146,9 @@ export default function Register() {
           >
             <div>
               <Label
-                icon={<UserCircleIcon className='w-5 h-5 text-gray-400' />}
+                icon={<UserCircleIcon className='w-5 h-5 text-gray-400 dark:text-gray-500' />}
                 htmlFor='name'
-                className='block mb-1 font-medium text-gray-700'
+                className='block mb-1 font-medium text-gray-700 dark:text-gray-300'
               >
                 Name
               </Label>
@@ -150,16 +163,16 @@ export default function Register() {
                 autoComplete='name'
               />
               {errors.name && (
-                <span className='text-red-500 text-xs font-bold'>
+                <span className='text-red-500 dark:text-red-400 text-xs font-bold'>
                   {errors.name}
                 </span>
               )}
             </div>
             <div>
               <Label
-                icon={<EnvelopeIcon className='w-5 h-5 text-gray-400' />}
+                icon={<EnvelopeIcon className='w-5 h-5 text-gray-400 dark:text-gray-500' />}
                 htmlFor='email'
-                className='block mb-1 font-medium text-gray-700'
+                className='block mb-1 font-medium text-gray-700 dark:text-gray-300'
               >
                 Email
               </Label>
@@ -174,16 +187,16 @@ export default function Register() {
                 autoComplete='email'
               />
               {errors.email && (
-                <span className='text-red-500 text-xs font-bold'>
+                <span className='text-red-500 dark:text-red-400 text-xs font-bold'>
                   {errors.email}
                 </span>
               )}
             </div>
             <div>
               <Label
-                icon={<LockOpenIcon className='w-5 h-5 text-gray-400' />}
+                icon={<LockOpenIcon className='w-5 h-5 text-gray-400 dark:text-gray-500' />}
                 htmlFor='password'
-                className='block mb-1 font-medium text-gray-700'
+                className='block mb-1 font-medium text-gray-700 dark:text-gray-300'
               >
                 Password
               </Label>
@@ -198,16 +211,16 @@ export default function Register() {
                 autoComplete='new-password'
               />
               {errors.password && (
-                <span className='text-red-500 text-xs font-bold'>
+                <span className='text-red-500 dark:text-red-400 text-xs font-bold'>
                   {errors.password}
                 </span>
               )}
             </div>
             <div>
               <Label
-                icon={<LockOpenIcon className='w-5 h-5 text-gray-400' />}
+                icon={<LockOpenIcon className='w-5 h-5 text-gray-400 dark:text-gray-500' />}
                 htmlFor='samePassword'
-                className='block mb-1 font-medium text-gray-700'
+                className='block mb-1 font-medium text-gray-700 dark:text-gray-300'
               >
                 Confirm Password
               </Label>
@@ -222,23 +235,24 @@ export default function Register() {
                 autoComplete='new-password'
               />
               {errors.samePassword && (
-                <span className='text-red-500 text-xs font-bold'>
+                <span className='text-red-500 dark:text-red-400 text-xs font-bold'>
                   {errors.samePassword}
                 </span>
               )}
             </div>
             <button
               type='submit'
-              className='w-full cursor-pointer bg-teal-500 text-white py-2 px-4 rounded-lg hover:bg-teal-600 transition-colors duration-200 mt-4'
+              disabled={loading}
+              className='w-full cursor-pointer bg-teal-500 hover:bg-teal-600 dark:bg-teal-700 dark:hover:bg-teal-600 text-white py-2 px-4 rounded-lg transition-colors duration-200 mt-4 disabled:cursor-not-allowed disabled:opacity-50'
             >
               Register
             </button>
 
-            <p className='text-gray-300 font-medium text-base text-center mt-4'>
+            <p className='text-gray-700 dark:text-gray-400 font-medium text-base text-center mt-4'>
               Already have an account?{" "}
               <a
                 href='/login'
-                className='text-teal-500 hover:underline'
+                className='text-teal-500 dark:text-teal-400 hover:underline'
               >
                 Login here
               </a>

@@ -12,14 +12,14 @@ export default function CharacterCounter({
   return (
     <div className={`flex items-center justify-between ${className}`}>
       <span className={`text-xs font-medium ${
-        isDanger ? 'text-red-600' : 
-        isWarning ? 'text-orange-500' : 
-        'text-gray-500'
+        isDanger ? 'text-red-600 dark:text-red-400' : 
+        isWarning ? 'text-orange-500 dark:text-orange-400' : 
+        'text-gray-500 dark:text-gray-400'
       }`}>
         {current}/{max} characters
       </span>
       
-      <div className="w-24 h-1.5 bg-gray-200 rounded-full overflow-hidden">
+      <div className="w-24 h-1.5 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
         <div 
           className={`h-full transition-all duration-300 ${
             isDanger ? 'bg-red-500' : 

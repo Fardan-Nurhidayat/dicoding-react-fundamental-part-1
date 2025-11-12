@@ -22,7 +22,7 @@ export default function HomePage() {
     async function fetchNotes() {
       const unArchivedNotes = await getAllNotes();
       setUnarchivedNotes(unArchivedNotes.data);
-      console.log(unArchivedNotes);
+      // console.log(unArchivedNotes);
     }
     fetchNotes();
   }, []);

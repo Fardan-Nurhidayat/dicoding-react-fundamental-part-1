@@ -13,7 +13,6 @@ import {
   MoonIcon,
 } from "@heroicons/react/24/solid";
 import { Link, useLocation } from "react-router";
-import { useState } from "react";
 import { useTheme } from "@hooks/useTheme";
 import { useLang } from "@hooks/useLang";
 export const Sidebar = () => {
@@ -21,10 +20,7 @@ export const Sidebar = () => {
   const { lang , toggleLang , t} = useLang();
   const location = useLocation();
 
-  const [username , setUsername] = useState(() => {
-    const storedEmail = localStorage.getItem('userEmail');
-    return storedEmail ? storedEmail : 'Guest';
-  });
+  const username = localStorage.getItem('userEmail');
     const menuItems = [
       {
         path: "/",

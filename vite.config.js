@@ -21,6 +21,7 @@ export default defineConfig({
       "@layout": resolve(__dirname, "src/layout"),
       "@context": resolve(__dirname, "src/context"),
       "@hooks" : resolve(__dirname, "src/hooks"),
+      "@lang" : resolve(__dirname , "src/lang"),
     },
   },
 });

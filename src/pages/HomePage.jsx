@@ -4,9 +4,9 @@ import { useSearchParams } from "react-router";
 import NotesList from "@components/notes/NotesList";
 import SearchBar from "@components/SearchBar";
 import { DocumentTextIcon } from "@heroicons/react/24/outline";
-import { useContext } from "react";
-import LangContext from "@context/LangContext";
+import { useLang } from "@hooks/useLang";
 export default function HomePage() {
+  const {t}  = useLang();
   const [unarchivedNotes, setUnarchivedNotes] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
   const searchQuery = searchParams.get("search") || "";
@@ -45,17 +45,21 @@ export default function HomePage() {
             <div>
               <h1 className="text-2xl font-bold text-gray-800 dark:text-gray-100 flex items-center gap-2">
                 <DocumentTextIcon className="w-7 h-7 text-teal-600" />
-                Active Notes
+                {
+                  t('header.homePageTitle')
+                }
               </h1>
               <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
-                {unarchivedNotes.length} {unarchivedNotes.length === 1 ? 'note' : 'notes'} found
+                {unarchivedNotes.length} {t('header.founded')}
               </p>
             </div>
           </div>
           <SearchBar 
             query={searchQuery} 
             onQueryChange={handleSearchChange}
-            placeholder="Search active notes..."
+            placeholder={
+              t('header.searchActiveNotes')
+            }
           />
         </div>
       </div>

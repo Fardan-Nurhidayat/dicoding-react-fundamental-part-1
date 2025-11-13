@@ -4,9 +4,11 @@ import { PencilSquareIcon } from "@heroicons/react/24/outline";
 import FormInput from "@components/form/FormInput";
 import { Spinner } from "@material-tailwind/react";
 import { useState } from "react";
+import { useLang } from "@/hooks/useLang";
 export default function CreatePage() {
   const [loading , setLoading] = useState(false);
   const navigate = useNavigate();
+  const { t } = useLang();
 
   const handleSubmit = (formData) => {
     try {
@@ -38,14 +40,14 @@ export default function CreatePage() {
         <div className='mb-8'>
           <h1 className='text-3xl font-bold text-gray-800 dark:text-gray-100 mb-2 flex items-center gap-3'>
             <PencilSquareIcon className='w-8 h-8 text-teal-600' />
-            Create New Note
+            {t("createPage.title")}
           </h1>
-          <p className='text-gray-600 dark:text-gray-400'>Capture your thoughts and ideas</p>
+          <p className='text-gray-600 dark:text-gray-400'>{t("createPage.subtitle")}</p>
         </div>
 
         <FormInput
           onSubmit={handleSubmit}
-          submitText='Create Note'
+          submitText={t("createPage.submitButton")}
           showCancel={true}
           onCancel={handleCancel}
           titleMaxLength={50}
@@ -54,9 +56,7 @@ export default function CreatePage() {
 
         <div className='mt-6 bg-blue-50 dark:bg-blue-900/30 border border-blue-200 dark:border-blue-700 rounded-lg p-4'>
           <p className='text-sm text-blue-800 dark:text-blue-200'>
-            <span className='font-semibold'>Tip:</span> Keep your notes concise
-            and organized. Use a descriptive title to make them easy to find
-            later.
+            <span className='font-semibold'>{t("createPage.tip")}</span> {t("createPage.tipMessage")}
           </p>
         </div>
       </div>

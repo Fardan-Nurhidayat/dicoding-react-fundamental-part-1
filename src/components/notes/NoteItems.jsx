@@ -3,7 +3,7 @@ import { formatedDate } from "@utils/utils";
 import Button from "@components/Button";
 import { ArchiveBoxIcon, TrashIcon } from "@heroicons/react/24/outline";
 import { Link } from "react-router";
-
+import { useLang } from "@hooks/useLang";
 export default function NotesItems({
   id,
   title,
@@ -13,6 +13,8 @@ export default function NotesItems({
   archivedNotesHandler,
   deleteNoteHandler,
 }) {
+  const { t } = useLang();
+
   return (
     <div className="group relative bg-white dark:bg-gray-800 rounded-xl shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 dark:border-gray-700 overflow-hidden">
       <div className="absolute top-0 left-0 w-full h-1 bg-linear-to-r from-teal-500 to-blue-500"></div>
@@ -46,7 +48,9 @@ export default function NotesItems({
             className="flex-1 flex items-center justify-center gap-2"
           >
             <ArchiveBoxIcon className="w-4 h-4" />
-            Archive
+            {
+              t('button.archived')
+            }
           </Button>
           <Button 
             variant="delete"

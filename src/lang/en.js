@@ -1,0 +1,56 @@
+export const en = {
+  sidebar: {
+    title: "Notes App",
+    subtitle: "Organize your thoughts",
+    menu: {
+      activeNotes: "Active Notes",
+      archivedNotes: "Archived Notes",
+      createNote: "Create Note",
+    },
+    profile: {
+      viewProfile: "View profile",
+    },
+  },
+  header: {
+    homePageTitle: "Active Notes",
+    unarchivedTitle: "Archived Notes",
+    founded: "Note Founded",
+    searchActiveNotes: "Search Active Notes",
+    searchUnarchivedNotes: "Search Unarchived Notes",
+  },
+  button: {
+    archived: "Archived",
+    unarchived: "Unarchived",
+    create: "create",
+  },
+  createPage: {
+    title: "Create New Note",
+    subtitle: "Capture your thoughts and ideas",
+    submitButton: "Create Note",
+    tip: "Tip:",
+    tipMessage: "Keep your notes concise and organized. Use a descriptive title to make them easy to find later.",
+  },
+  notFoundPage: {
+    title: "Error 404",
+    subtitle: "It looks like something went wrong.",
+    description: "Don't worry, our team is already on it. Please try refreshing the page or come back later.",
+    backButton: "back home",
+  },
+  nullNotes: {
+    archivedNotes: "No archived notes",
+    activeNotes: "No active notes",
+    description: "Create a new note to save your thoughts and ideas.",
+  },
+  form: {
+    title: "Title",
+    content: "Content",
+    titlePlaceholder: "Enter note title...",
+    contentPlaceholder: "Write your note content here...",
+    titleRequired: "Title is required",
+    contentRequired: "Content is required",
+    titleMaxLength: "Title must be less than {{max}} characters",
+    contentMaxLength: "Content must be less than {{max}} characters",
+    maxCharacters: "Maximum {{max}} characters",
+    cancel: "Cancel",
+  },
+};

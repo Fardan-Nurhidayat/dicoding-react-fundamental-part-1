@@ -5,6 +5,7 @@ import Textarea from "./Textarea";
 import FormField from "./FormField";
 import FormActions from "./FormActions";
 import CharacterCounter from "./CharacterCounter";
+import { useLang } from "@/hooks/useLang";
 
 export default function FormInput({ 
   onSubmit, 
@@ -17,6 +18,7 @@ export default function FormInput({
 }) {
   const [formData, setFormData] = useState(initialData);
   const [errors, setErrors] = useState({});
+  const { t } = useLang();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -30,15 +32,15 @@ export default function FormInput({
     const newErrors = {};
     
     if (!formData.title.trim()) {
-      newErrors.title = "Title is required";
+      newErrors.title = t("form.titleRequired");
     } else if (formData.title.length > titleMaxLength) {
-      newErrors.title = `Title must be less than ${titleMaxLength} characters`;
+      newErrors.title = t("form.titleMaxLength").replace("{{max}}", titleMaxLength);
     }
     
     if (!formData.body.trim()) {
-      newErrors.body = "Content is required";
+      newErrors.body = t("form.contentRequired");
     } else if (formData.body.length > bodyMaxLength) {
-      newErrors.body = `Content must be less than ${bodyMaxLength} characters`;
+      newErrors.body = t("form.contentMaxLength").replace("{{max}}", bodyMaxLength);
     }
     
     setErrors(newErrors);
@@ -55,11 +57,11 @@ export default function FormInput({
   return (
     <form onSubmit={handleSubmit} className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-8 space-y-6 transition-colors duration-300">
       <FormField
-        label="Title"
+        label={t("form.title")}
         htmlFor="title"
         required
         error={errors.title}
-        helpText={`Maximum ${titleMaxLength} characters`}
+        helpText={t("form.maxCharacters").replace("{{max}}", titleMaxLength)}
       >
         <Input
           type="text"
@@ -67,7 +69,7 @@ export default function FormInput({
           id="title"
           value={formData.title}
           onChange={handleChange}
-          placeholder="Enter note title..."
+          placeholder={t("form.titlePlaceholder")}
           required
           maxLength={titleMaxLength}
         />
@@ -79,18 +81,18 @@ export default function FormInput({
       </FormField>
 
       <FormField
-        label="Content"
+        label={t("form.content")}
         htmlFor="body"
         required
         error={errors.body}
-        helpText={`Maximum ${bodyMaxLength} characters`}
+        helpText={t("form.maxCharacters").replace("{{max}}", bodyMaxLength)}
       >
         <Textarea
           name="body"
           id="body"
           value={formData.body}
           onChange={handleChange}
-          placeholder="Write your note content here..."
+          placeholder={t("form.contentPlaceholder")}
           rows={12}
           required
           maxLength={bodyMaxLength}
@@ -104,7 +106,7 @@ export default function FormInput({
 
       <FormActions
         submitText={submitText}
-        cancelText="Cancel"
+        cancelText={t("form.cancel")}
         onCancel={showCancel ? onCancel : null}
         submitDisabled={!formData.title.trim() || !formData.body.trim()}
       />

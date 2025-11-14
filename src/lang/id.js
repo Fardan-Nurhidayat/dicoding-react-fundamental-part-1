@@ -9,6 +9,7 @@ export const id = {
     },
     profile: {
       viewProfile: "Lihat profil",
+      logout: "Keluar",
     },
   },
   header: {
@@ -35,6 +36,23 @@ export const id = {
     subtitle: "Sepertinya ada yang salah.",
     description: "Jangan khawatir, tim kami sudah menanganinya. Silakan coba refresh halaman atau kembali lagi nanti.",
     backButton: "kembali ke beranda",
+  },
+
+  detailPage: {
+    noteNotFoundTitle: "Catatan Tidak Ditemukan",
+    noteNotFoundMessage: "Catatan yang Anda cari tidak ada atau telah dihapus.",
+    goBack: "Kembali",
+    back: "Kembali",
+    archived: "Diarsipkan",
+    active: "Aktif",
+    archive: "Arsipkan",
+    unarchive: "Aktifkan",
+    delete: "Hapus",
+    created: "Dibuat",
+    updated: "Diperbarui",
+    tipTitle: "Tips:",
+    tipMessage: "Anda dapat mengarsipkan catatan ini untuk referensi nanti, atau menghapusnya secara permanen jika tidak lagi diperlukan.",
+    confirmDelete: "Apakah Anda yakin ingin menghapus catatan ini?",
   },
 
   nullNotes : {

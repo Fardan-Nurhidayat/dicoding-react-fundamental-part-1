@@ -9,6 +9,7 @@ export const en = {
     },
     profile: {
       viewProfile: "View profile",
+      logout: "Logout",
     },
   },
   header: {
@@ -35,6 +36,22 @@ export const en = {
     subtitle: "It looks like something went wrong.",
     description: "Don't worry, our team is already on it. Please try refreshing the page or come back later.",
     backButton: "back home",
+  },
+  detailPage: {
+    noteNotFoundTitle: "Note Not Found",
+    noteNotFoundMessage: "The note you're looking for doesn't exist or has been deleted.",
+    goBack: "Go Back",
+    back: "Back",
+    archived: "Archived",
+    active: "Active",
+    archive: "Archive",
+    unarchive: "Unarchive",
+    delete: "Delete",
+    created: "Created",
+    updated: "Updated",
+    tipTitle: "Tip:",
+    tipMessage: "You can archive this note to keep it for later reference, or delete it permanently if you no longer need it.",
+    confirmDelete: "Are you sure you want to delete this note?",
   },
   nullNotes: {
     archivedNotes: "No archived notes",

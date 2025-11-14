@@ -12,13 +12,15 @@ import {
   SunIcon,
   MoonIcon,
 } from "@heroicons/react/24/solid";
-import { Link, useLocation } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import { useTheme } from "@hooks/useTheme";
 import { useLang } from "@hooks/useLang";
 export const Sidebar = () => {
   const { theme, toggleTheme } = useTheme();
   const { lang , toggleLang , t} = useLang();
   const location = useLocation();
+
+  const navigate = useNavigate();
 
   const username = localStorage.getItem('userEmail');
     const menuItems = [
@@ -191,6 +193,18 @@ export const Sidebar = () => {
             </span>
           </div>
         </Link>
+        <div className='mt-3 px-2'>
+          <button
+            onClick={() => {
+              localStorage.removeItem('accessToken');
+              localStorage.removeItem('userEmail');
+              navigate('/login');
+            }}
+            className='w-full inline-flex items-center justify-center gap-2 px-3 py-2 text-sm bg-red-50 hover:bg-red-100 dark:bg-red-900/20 dark:hover:bg-red-900/10 text-red-600 rounded-lg transition-all duration-200'
+          >
+            {t("sidebar.profile.logout")}
+          </button>
+        </div>
       </div>
     </Card>
   );
